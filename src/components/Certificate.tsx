@@ -1,331 +1,242 @@
 'use client';
-import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FiX, FiChevronLeft, FiChevronRight, FiCheck } from "react-icons/fi";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Image, { StaticImageData } from "next/image"; // Import StaticImageData
 
-// Image imports
+import { useState, type ReactNode } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import Image, { type StaticImageData } from "next/image";
+import { FiArrowUpRight, FiAward, FiExternalLink, FiX } from "react-icons/fi";
+
 import employability from "../assets/employ_certeficate.jpg";
 import cisco from "../assets/cisco_certeficate.jpg";
 import udacity from "../assets/udacity_certeficate.jpg";
 import charity_certeficate from "../assets/charity_certeficate.jpg";
 
-const certificates = [
+type CertificateLink = {
+  label: string;
+  href: string;
+  icon: ReactNode;
+};
+
+type CertificateItem = {
+  title: string;
+  category: string;
+  shortDesc: string;
+  fullDesc: string;
+  tags: string[];
+  image: StaticImageData;
+  links: CertificateLink[];
+};
+
+const certificates: CertificateItem[] = [
   {
-    title: "Introduction to Cybersecurity Course",
-    shortDesc: "A cybersecurity course where I learned what cybersecurity is and its potential impact.",
+    title: "Introduction to Cybersecurity",
+    category: "Cybersecurity",
+    shortDesc: "A practical course covering the basics of online safety, threats, vulnerabilities, and organizational defense.",
     fullDesc:
-      "This course give me the knowledge of basics of being safe online, including what cybersecurity is and its potential impact.I have seen the most common cyber threats, attacks, and vulnerabilities. I studied also to protect oneself while online. I have learned how organizations can protect their operations against these attacks.Access a variety of information and resources to explore the different career options in cybersecurity.",
-    tags: [
-      "Cybersecurity",
-      "NetworkSecurity",
-      "EthicalHacking",
-      "CyberThreats",
-      "RiskManagement",
-      "SecurityAwareness",
-      "VulnerabilityAssessment",
-      "IncidentResponse",
-    ],
+      "This course gave me a strong foundation in cybersecurity, including how to recognize common threats, assess digital risks, and understand the importance of prevention. I explored the role of security awareness, the impact of cyber attacks, and the strategies organizations use to protect systems, data, and user trust.",
+    tags: ["Security", "Threats", "Risk", "Awareness", "Protection"],
     image: cisco,
     links: [],
   },
   {
-    title: "Programing Fundamentals Course",
-    shortDesc: "Completed Udacity’s Programming Fundamentals course, learning the basics of web development including HTML, CSS, JavaScript, and DOM manipulation.",
+    title: "Programming Fundamentals",
+    category: "Web Development",
+    shortDesc: "A front-end learning path focused on HTML, CSS, JavaScript, and DOM-based interactivity.",
     fullDesc:
-      "Successfully completed the Programming Fundamentals course on Udacity, where I built a solid foundation in front-end web development. I learned how to structure web pages with HTML, style them with CSS, and bring interactivity using JavaScript. The course also covered DOM manipulation, allowing me to dynamically update content and respond to user input. Through hands-on projects, I gained practical skills in building responsive, interactive web pages — setting the stage for deeper learning in web and software development.",
-    tags: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "DOM",
-      "WebDevelopment",
-      "FrontEndDevelopment",
-      "Udacity",
-      "ProgrammingFundamentals",
-      "ResponsiveDesign",
-      "InteractiveWebPages",
-    ],
+      "This Udacity course helped me build a solid base in front-end development. I learned how to structure pages with HTML, style them with CSS, and add interactivity through JavaScript. The program also introduced DOM manipulation, which strengthened my understanding of responsive design and user-centered web experiences.",
+    tags: ["HTML", "CSS", "JavaScript", "DOM", "Frontend"],
     image: udacity,
     links: [
-      {
-        icon: <FiCheck />,
-        url: "www.udacity.com/certificate/e/4eef93d8-4bc3-11ef-b2ae-9f07b4fe3618",
-      },
+      { label: "Credential", href: "https://www.udacity.com/certificate/e/4eef93d8-4bc3-11ef-b2ae-9f07b4fe3618", icon: <FiAward /> },
     ],
   },
   {
-    title: "Employability and Job readiness Skills",
-    shortDesc:
-      "Completed an Employability and Job Readiness Program focused on enhancing professional skills, resume writing, interview preparation, and workplace communication.",
+    title: "Employability and Job Readiness",
+    category: "Career Skills",
+    shortDesc: "A professional development program focused on communication, resume writing, interviews, and workplace readiness.",
     fullDesc:
-      "Successfully completed an Employability and Job Readiness Program designed to prepare participants for the workforce. The program covered essential career-building topics including resume writing, interview techniques, professional communication, workplace ethics, and team collaboration. It also focused on developing soft skills such as critical thinking, adaptability, and time management — all of which are vital for succeeding in today’s job market. This training significantly improved my confidence and readiness to enter a professional work environment.",
-    tags: [
-      "EmployabilitySkills",
-      "JobReadiness",
-      "ResumeWriting",
-      "InterviewSkills",
-      "ProfessionalCommunication",
-      "WorkplaceEtiquette",
-      "SoftSkills",
-      "TimeManagement",
-    ],
+      "This program supported my preparation for the workforce by sharpening professional communication, interview techniques, and resume basics. It also emphasized workplace etiquette, adaptability, and time management, all of which are essential in real-world work environments and team-based settings.",
+    tags: ["Resume", "Interview", "Communication", "Soft Skills"],
     image: employability,
     links: [],
   },
   {
-    title: "Participation in Charity Event",
-    shortDesc:
-      "Participated in a charity event focused on raising funds and awareness for a local cause, contributing to community support and engagement.",
+    title: "Charity Event Participation",
+    category: "Community",
+    shortDesc: "A community-focused event where I contributed to fundraising, outreach, and social impact efforts.",
     fullDesc:
-      "Participated in a charity event aimed at raising funds and awareness for a local cause. The event included various activities such as fundraising campaigns, community outreach, and volunteer work. My involvement helped to support the cause and foster community engagement. This experience not only enhanced my teamwork and organizational skills but also deepened my understanding of social responsibility and the impact of collective efforts in making a difference.",
-    tags: [
-      "CharityEvent",
-      "CommunityService",
-      "Fundraising",
-      "VolunteerWork",
-      "SocialResponsibility",
-      "Teamwork",
-      "CommunityEngagement",
-    ],
+      "Participating in the charity event gave me firsthand experience in fundraising, community engagement, and social responsibility. It reinforced the importance of teamwork and collective action, while also showing how practical outreach can help create meaningful impact for a local cause.",
+    tags: ["Community", "Volunteer", "Fundraising", "Teamwork"],
     image: charity_certeficate,
     links: [],
   },
 ];
 
 export default function Certificate() {
-  const [selectedProject, setSelectedProject] = useState<{
-    title: string;
-    shortDesc: string;
-    fullDesc: string;
-    tags: string[];
-    image: StaticImageData;
-    links: { icon: React.ReactNode; url: string }[];
-    technicalDetails?: string[];
-  } | null>(null);
-  const sliderRef = useRef<Slider | null>(null);
-
-  const sliderSettings = {
-    dots: true,
-    arrows: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          dots: true,
-        },
-      },
-    ],
-    appendDots: (dots: React.ReactNode) => (
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 transform">
-        <ul className="flex space-x-2">{dots}</ul>
-      </div>
-    ),
-    customPaging: (i: number) => (
-      <div
-        className={`h-2 w-2 rounded-full transition-all ${
-          i < Math.ceil(certificates.length / 3) ? "bg-gray-500 hover:bg-blue-400" : "hidden"
-        }`}
-      />
-    ),
-  };
+  const [selectedCertificate, setSelectedCertificate] = useState<CertificateItem | null>(null);
 
   return (
-    <section id="" className="bg-gray-900/50 py-20 backdrop-blur-md">
-      <div className="container mx-auto px-4">
-        <motion.h2
+    <section id="certificates" className="relative overflow-hidden bg-slate-900 py-24">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,197,94,0.12),transparent_35%)]" />
+
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="mb-12 text-center text-4xl font-bold text-white"
+          viewport={{ once: true, amount: 0.2 }}
+          className="mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between"
         >
-          My <span className="text-blue-400">Certificates</span>
-        </motion.h2>
+          <div>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-emerald-400">Recognition</p>
+            <h2 className="text-2xl font-black text-white md:text-3xl">
+              My <span className="text-emerald-400">Certificates</span>
+            </h2>
+          </div>
 
-        <div className="relative px-8">
-          <Slider ref={sliderRef} {...sliderSettings}>
-            {certificates.map((project, index) => (
-              <div key={index} className="px-2">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                  className="flex h-full flex-col overflow-hidden rounded-xl bg-gray-800 transition-all hover:shadow-lg hover:shadow-blue-500/20"
+          <div className="inline-flex w-fit items-center rounded-full border border-emerald-400/20 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-200">
+            Learning, growth, and impact
+          </div>
+        </motion.div>
+
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          {certificates.map((certificate, index) => (
+            <motion.article
+              key={certificate.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: index * 0.08 }}
+              whileHover={{ y: -6 }}
+              className="group flex h-full flex-col overflow-hidden rounded-[28px] border border-white/10 bg-white/5 p-4 shadow-[0_20px_50px_rgba(15,23,42,0.35)] backdrop-blur-sm"
+            >
+              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-slate-950">
+                <Image
+                  src={certificate.image}
+                  alt={certificate.title}
+                  className="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-900/10 to-transparent" />
+                <div className="absolute left-4 top-4 rounded-full border border-emerald-400/30 bg-slate-950/70 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-200">
+                  {certificate.category}
+                </div>
+              </div>
+
+              <div className="mt-5 flex items-start justify-between gap-3">
+                <h3 className="text-lg font-bold text-white">{certificate.title}</h3>
+                <div className="rounded-full border border-white/10 bg-white/5 p-2 text-emerald-300">
+                  <FiAward className="text-lg" />
+                </div>
+              </div>
+
+              <p className="mt-4 text-sm leading-6 text-slate-300">{certificate.shortDesc}</p>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {certificate.tags.slice(0, 3).map((tag) => (
+                  <span key={tag} className="rounded-full border border-emerald-400/20 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-medium text-emerald-200">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-auto flex items-center justify-between pt-6">
+                <div className="flex flex-wrap gap-2">
+                  {certificate.links.length > 0 ? (
+                    certificate.links.map((link) => (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-900 px-3 py-2 text-xs font-medium text-slate-200 transition hover:border-emerald-400/40 hover:text-white"
+                      >
+                        {link.icon}
+                        {link.label}
+                      </a>
+                    ))
+                  ) : (
+                    <span className="text-xs uppercase tracking-[0.18em] text-slate-400">Verified</span>
+                  )}
+                </div>
+
+                <button
+                  onClick={() => setSelectedCertificate(certificate)}
+                  className="rounded-full bg-emerald-500 px-4 py-2 text-xs font-semibold text-white transition hover:bg-emerald-400"
                 >
-                  <div className="relative aspect-video h-48 overflow-hidden bg-gray-700">
-                     
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        className="h-full w-full object-cover transition-transform hover:scale-105"
-                      />
+                  View
+                </button>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {selectedCertificate && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedCertificate(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.96 }}
+              onClick={(e) => e.stopPropagation()}
+              className="max-h-[90vh] w-full max-w-5xl overflow-hidden rounded-[30px] border border-white/10 bg-slate-900 shadow-[0_30px_80px_rgba(15,23,42,0.8)]"
+            >
+              <div className="relative">
+                <button
+                  onClick={() => setSelectedCertificate(null)}
+                  className="absolute right-4 top-4 z-10 rounded-full border border-white/10 bg-slate-950/80 p-2 text-slate-200 transition hover:text-white"
+                  aria-label="Close certificate details"
+                >
+                  <FiX className="text-xl" />
+                </button>
+
+                <div className="grid gap-0 lg:grid-cols-[1.2fr_0.8fr]">
+                  <div className="border-b border-white/10 lg:border-b-0 lg:border-r">
+                    <Image
+                      src={selectedCertificate.image}
+                      alt={selectedCertificate.title}
+                      className="h-full max-h-105 w-full object-cover"
+                    />
                   </div>
 
-                  <div className="flex flex-grow flex-col p-6">
-                    <h3 className="mb-2 text-xl font-bold text-white">
-                      {project.title}
-                    </h3>
-                    <p className="mb-4 text-gray-300">{project.shortDesc}</p>
+                  <div className="flex flex-col p-6 md:p-8">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-400">
+                      {selectedCertificate.category}
+                    </p>
+                    <h3 className="text-3xl font-black text-white">{selectedCertificate.title}</h3>
 
-                    <div className="mb-4 flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full bg-gray-700 px-2 py-1 text-xs text-blue-400"
-                        >
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {selectedCertificate.tags.map((tag) => (
+                        <span key={tag} className="rounded-full border border-emerald-400/20 bg-emerald-500/10 px-2.5 py-1 text-xs text-emerald-200">
                           {tag}
                         </span>
                       ))}
                     </div>
 
-                    <div className="mt-auto flex items-center justify-between">
-                      <div className="flex space-x-4">
-                        {project.links.map((link, i) => (
-                          <motion.a
-                            key={i}
-                            href={link.url}
-                            whileHover={{ scale: 1.1 }}
-                            className="text-gray-400 hover:text-white"
+                    <p className="mt-6 text-sm leading-7 text-slate-300">{selectedCertificate.fullDesc}</p>
+
+                    {selectedCertificate.links.length > 0 && (
+                      <div className="mt-8 flex flex-wrap gap-3">
+                        {selectedCertificate.links.map((link) => (
+                          <a
+                            key={link.label}
+                            href={link.href}
                             target="_blank"
-                            rel="noopener noreferrer"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-400"
                           >
                             {link.icon}
-                          </motion.a>
+                            {link.label}
+                          </a>
                         ))}
                       </div>
-                      <button
-                        onClick={() => setSelectedProject(project)}
-                        className="text-sm font-medium text-blue-400 hover:text-blue-300"
-                      >
-                        Read More →
-                      </button>
-                    </div>
+                    )}
                   </div>
-                </motion.div>
-              </div>
-            ))}
-          </Slider>
-
-          {/* Custom Arrows */}
-          <button
-            onClick={() => sliderRef.current && sliderRef.current.slickPrev()}
-            className="absolute left-0 top-1/2 -translate-y-1/2 rounded-full bg-gray-800 p-2 text-white hover:bg-blue-600"
-          >
-            <FiChevronLeft className="text-2xl" />
-          </button>
-          <button
-            onClick={() => sliderRef.current && sliderRef.current.slickNext()}
-            className="absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-gray-800 p-2 text-white hover:bg-blue-600"
-          >
-            <FiChevronRight className="text-2xl" />
-          </button>
-        </div>
-      </div>
-
-      {/* Project Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
-            onClick={() => setSelectedProject(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              className="max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-xl bg-gray-800"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="relative">
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="absolute right-4 top-4 z-10 text-gray-400 hover:text-white"
-                >
-                  <FiX className="text-2xl" />
-                </button>
-                <div className="relative aspect-video w-full overflow-hidden bg-gray-900">
-                  
-                    <Image
-                      src={selectedProject.image}
-                      alt={selectedProject.title}
-                      className="h-full w-full object-contain"
-                    />
-                  
                 </div>
-              </div>
-
-              <div className="p-6">
-                <h3 className="mb-2 text-2xl font-bold text-white">
-                  {selectedProject.title}
-                </h3>
-
-                <div className="mb-6 space-y-4">
-                  <h4 className="text-lg font-semibold text-blue-400">
-                    Project Overview
-                  </h4>
-                  <p className="text-gray-300">{selectedProject.fullDesc}</p>
-
-                  {selectedProject.technicalDetails && (
-                    <>
-                      <h4 className="text-lg font-semibold text-blue-400">
-                        Technical Implementation
-                      </h4>
-                      <ul className="ml-6 list-disc text-gray-300">
-                        {selectedProject.technicalDetails.map((detail, i) => (
-                          <li key={i}>{detail}</li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                </div>
-
-                <div className="mb-6 flex flex-wrap gap-2">
-                  {selectedProject.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-gray-700 px-3 py-1.5 text-sm text-blue-400"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {selectedProject.links.length > 0 && (
-                  <div className="flex flex-wrap gap-4">
-                    {selectedProject.links.map((link, i) => (
-                      <motion.a
-                        key={i}
-                        href={link.url}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="flex items-center space-x-2 rounded-lg bg-blue-600 px-4 py-2 text-white"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {link.icon}
-                        <span>View Code</span>
-                      </motion.a>
-                    ))}
-                  </div>
-                )}
               </div>
             </motion.div>
           </motion.div>
@@ -334,3 +245,4 @@ export default function Certificate() {
     </section>
   );
 }
+

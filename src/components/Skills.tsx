@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { FiCode, FiServer, FiType } from "react-icons/fi";
 import { FaReact, FaNodeJs, FaKeyboard, FaLightbulb, FaUser, FaComment } from "react-icons/fa";
-import { SiArduino, SiCplusplus, SiFirebase, SiMongodb, SiMysql } from "react-icons/si";
+import { SiArduino, SiCplusplus, SiFirebase, SiMongodb, SiMysql, SiPostgresql } from "react-icons/si";
 import { DiJava } from "react-icons/di"; // Java icon from different package
 
 export default function Skills() {
@@ -58,9 +58,10 @@ export default function Skills() {
             icon: <SiMongodb className="text-2xl text-blue-400" />,
             skills: [
                 { name: "MongoDB", icon: <SiMongodb className="text-xl" />, level: 75 },
-                { name: "MySQL", icon: <SiMysql className="text-xl" />, level: 70 },
-                { name: "MariaDB", icon: <SiMysql className="text-xl" />, level: 70 },
-                { name: "Firebase", icon: <SiFirebase className="text-xl" />, level: 60 },
+                { name: "MySQL", icon: <SiMysql className="text-xl" />, level: 90 },
+                { name: "MariaDB", icon: <SiMysql className="text-xl" />, level: 80 },
+                { name: "PostgreSQL", icon: <SiPostgresql className="text-xl" />, level: 85 },
+                { name: "Firebase", icon: <SiFirebase className="text-xl" />, level: 80 },
             ],
         },
 
@@ -83,12 +84,12 @@ export default function Skills() {
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    className="mb-12 text-center text-4xl font-bold text-white"
+                    className="mb-12 text-center text-2xl font-bold text-white"
                 >
                     My <span className="text-blue-400">Skills</span>
                 </motion.h2>
 
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-4">
                     {skillCategories.map((category, index) => (
                         <motion.div
                             key={index}
@@ -102,7 +103,7 @@ export default function Skills() {
                                 <div className="mr-3 rounded-full bg-blue-500/10 p-2">
                                     {category.icon}
                                 </div>
-                                <h3 className="text-xl font-bold text-white">
+                                <h3 className="text-lg font-bold text-white">
                                     {category.title}
                                 </h3>
                             </div>
@@ -117,7 +118,7 @@ export default function Skills() {
                                                         {skill.icon}
                                                     </span>
                                                 )}
-                                                <span className="text-gray-300">{skill.name}</span>
+                                                <span className="text-gray-300 text-xs">{skill.name}</span>
                                             </div>
                                             <span className="text-xs text-blue-400">
                                                 {skill.level}%
@@ -144,10 +145,10 @@ export default function Skills() {
                     whileInView={{ opacity: 1 }}
                     className="mt-16 text-center"
                 >
-                    <h3 className="mb-6 text-2xl font-bold text-white">
+                    <h3 className="mb-6 text-xl font-bold text-white">
                         <span className="text-blue-400">Networking</span> Proficiency
                     </h3>
-                    <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-4">
+                    <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-4 text-sm">
                         {[
                             "Network Protocols",
                             "Firewall Configuration",

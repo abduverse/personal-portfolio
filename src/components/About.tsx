@@ -195,15 +195,18 @@ export default function About() {
                   key={i}
                   initial={{ opacity: 0, y: 20, scale: 1 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                  whileHover={{
+                    scale: 1.02,
+                    y: -2,
+                    transition: { duration: 0.2, ease: "easeOut" },
+                  }}
                   transition={{
                     delay: i * 0.1 + 0.7,
                     type: "spring",
                     stiffness: 300,
                     damping: 10,
-                    scale: { duration: 0.2 },
                   }}
-                  className={`rounded-xl p-4 ${passion.bg} border border-gray-700 hover:scale-125`}
+                  className={`rounded-xl p-4 ${passion.bg} border border-gray-700 transition-transform duration-200`}
                 >
                   <div className={`${passion.color} mb-2`}>{passion.icon}</div>
                   <h3 className="mb-1 font-medium text-white">
