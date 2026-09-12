@@ -133,12 +133,27 @@ const Contact = () => {
                             </>
                         )}
                     </motion.button>
-                    <div className="mt-4 flex gap-3 items-center">
+                    <div className="mt-4 flex gap-3 items-center flex-wrap">
                         <p>you can also contact me <i>by</i></p>
-                        <a href="https://github.com/abducodespro" target="_blank" className=""><FaGithub size={20} /></a>
-                        <a href="https://t.me/abducodespro" target="_blank" className=""><FaTelegramPlane size={20} /></a>
-                        <a href="https://www.instagram.com/abdu_code0/" target="_blank" className=""><FaInstagram size={20} /></a>
-                        <a href="https://call.imo.im/abdu_code" target="_blank" className=""><ImWhatsapp size={20} /></a>
+                        <a href="https://github.com/abducodespro" target="_blank" rel="noreferrer" className="" aria-label="GitHub"><FaGithub size={20} /></a>
+                        <a href="https://t.me/abducodespro" target="_blank" rel="noreferrer" className="" aria-label="Telegram"><FaTelegramPlane size={20} /></a>
+                        <a href="https://www.instagram.com/abdu_code0/" target="_blank" rel="noreferrer" className="" aria-label="Instagram"><FaInstagram size={20} /></a>
+                        <a href="https://call.imo.im/abdu_code" target="_blank" rel="noreferrer" className="" aria-label="WhatsApp"><ImWhatsapp size={20} /></a>
+                    </div>
+
+                    <div className="mt-6 rounded-xl border border-blue-400/20 bg-slate-900/60 p-4 text-sm text-slate-200">
+                        <p className="font-medium text-white">Direct contact</p>
+                        <div className="mt-2 space-y-2">
+                            <a href="mailto:abdulsomed0825@gmail.com" className="block text-blue-300 hover:text-blue-200">
+                                Email: abdulsomed0825@gmail.com
+                            </a>
+                            <a href="tel:+251908258118" className="block text-blue-300 hover:text-blue-200">
+                                Phone: +251 908 25 81 18
+                            </a>
+                            <a href="https://wa.me/251908258118" target="_blank" rel="noreferrer" className="block text-blue-300 hover:text-blue-200">
+                                WhatsApp: +251 908 25 81 18
+                            </a>
+                        </div>
                     </div>
                 </form>
             </motion.div>

@@ -10,6 +10,7 @@ import myapp from "../assets/nativeApp.png";
 import java from "../assets/java.png";
 import cplus from "../assets/cplus.jpg";
 import yen_logo from "../assets/yenpic.webp";
+import yeabsira_logo from "../assets/Yeabsira_img.jpg";
 import taf_hero from "../assets/taf_hero.webp";
 
 type ProjectLink = {
@@ -39,7 +40,7 @@ const projects: ProjectItem[] = [
     fullDesc:
       "The ERP system for Yeabsira Industrial Complex is a robust platform developed using Python, JavaScript, and the Frappe framework. It integrates various business functions including finance, operations, and reporting into a unified system. The platform is designed to improve efficiency, provide real-time insights, and support strategic decision-making across the organization.",
     tags: ["Python", "JavaScript", "Frappe", "ERPNext", "Finance", "Operations"],
-    image: yen_logo,
+    image: yeabsira_logo,
     links: [
       { label: "Open System", href: "http://196.191.151.226/", icon: <FiExternalLink /> },
     ],

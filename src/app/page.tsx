@@ -6,6 +6,7 @@ import Skills from "@/components/Skills";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import Projects from "@/components/Projects";
+import Services from "@/components/Services";
 import dynamic from "next/dynamic";
 const Testimonials = dynamic(() => import("@/components/Testimonials"));
 const Footer = dynamic(() => import("@/components/Footer"));
@@ -20,6 +21,7 @@ export default function Home() {
       <Certificate/>
       <Skills/>
       <Projects/>
+      <Services/>
       <Testimonials/>
       <Contact/>
       <Footer/>
